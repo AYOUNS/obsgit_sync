@@ -151,23 +151,18 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "6 - Main Notes/Indexes course.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
               "icon": "lucide-list",
-              "title": "Outline"
-            }
-          },
-          {
-            "id": "772337142f68fc41",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
+              "title": "Outline of Indexes course"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -186,7 +181,7 @@
       "github-sync:Sync with Remote": false
     }
   },
-  "active": "ee59849182c89fb0",
+  "active": "f79dba708c439e6b",
   "lastOpenFiles": [
     "Pasted image 20260102171324.png",
     "6 - Main Notes/Untitled 2.base",
