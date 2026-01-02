@@ -1,5 +1,5 @@
 {
-  "remoteURL": "git@github.com:AYOUNS/obsgit_sync.git",
+  "remoteURL": "https://github.com/AYOUNS/obsgit_sync.git",
   "gitLocation": "",
   "syncinterval": 0,
   "isSyncOnLoad": true,
