@@ -113,3 +113,74 @@ alter table people add index(first_name(4))
   3- not sorting needed
 
 -------------------------------------------------
+**9 - composite indexes**
+
+* if you want to delete an index : 
+  ```
+  alter table people drop index birthday
+  ```
+* in this video he was talking about create a index which is composite and contains multi keys and keys in the columns 
+* composite index is important an needed concept but need to care about the specific rules to use it
+* the way to create it with the following line : 
+  ```
+  alter table people add index multi(first_name , last_name , birthday)
+  ```
+* there is a specific rules to use the composite index :
+  **left side to right side no skip a column**
+* second rule : 
+  **it stops at the first range**
+* Key_length is the SQL using the composite key and how much it using of it and the number appears in this key_length is how much bytes used depend on how much key is used from the composite index
+* the meaning of "it stops at the first range " is when you need to search about a range of
+ex. birthday and you put it in the first execution it will stop after that and ignore everything after : 
+     -birthday > 1989-08-09 ✔
+     first_name = "ahmed"  X
+     last_name = "younes" X
+* the range happens because index is b-tree when you make equal select not range it's more specific search and when you make range it make sql search in alot of data 
+
+-------------------------------------------
+**10 - covering index**
+
+* Describe a situation in which an index covers the entire set of needs for a single query 
+* it's mean the query find everything it needs without searching in the original table which give more accuracy 
+* usually MySQL search first for index then start to find the row which have a condition then search for table to find the rest select 
+* but in covering index it create the index with some changes to make on column for filteration then the other for the searching
+  -create Index idx_Country_name_email  
+  -on users (Country , name , email )
+* so it's not need to make any search on original table 
+* you can know the SQL using covering Index when you : 
+  -explain select ,,,,,,,,
+  -Answer have : Using Index -------> "Search in Index only"
+  -Using where ---------> search in table and index 
+* When to use ? 
+  1- alot of non unique queries 
+  2- Select more than Insert 
+  3- Column is less
+  4- Strong Performance
+* When not to use ? 
+  1- alot of column 
+  2- data is usually changes
+  3- Query not usually used
+- الجدول = كتاب كبير 
+- الIndex = الفهرس 
+- ال covering Index = الفهرس و فيه الكلام نفسه 
+--------------------------------------
+**11- Functional Indexes**
+
+* imsgine you are searching for people which born in feb only like this : 
+  ```
+  Select * from People 
+  where Month(birthday) = 2
+  ```
+  here , Sql will go through every row to check and it makes the query very slow because in data it  stored with full date not only month
+* Function-Based index is the solution, it's a type of reference not store the values of columns with itself , but it store the result of the summition you determine before 
+* SQL calculate the answer of every row for the function and store it in separated reference and when you search about you go directly to this reference ( not table ) and print   
+  ```
+  Alter table People ADD index idx_month_birth ((Month(birthday)));
+  ```
+  - Multiple Arrow is important to make SQL understand this is func 
+
+**When to use ?**
+ 1 - one element of full date "Month only / day only / year only "
+ 2 - Searching with small character 
+ 3 - summition ex. "Price + taxes"
+ 
