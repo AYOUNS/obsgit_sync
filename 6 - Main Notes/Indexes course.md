@@ -183,4 +183,27 @@ ex. birthday and you put it in the first execution it will stop after that and i
  1 - one element of full date "Month only / day only / year only "
  2 - Searching with small character 
  3 - summition ex. "Price + taxes"
- 
+ ____________________________________________________
+ **12 - Indexing Json Column**
+
+- you can store complex data with json in one column 
+- the challenges ----> MySQL cannot make Indexes for one column Json with the same regular way 
+- the problem -----> it will make full search for full table 
+- the solution ------> we need to use index with the chosen  column
+
+**first way**
+------> generated column 
+- Create a fake column in table which task to extract the column from json 
+```
+alter table json_data ADD column email VARCHAR(255) Generated always As ('json'-->'$.email')
+alter table json_data ADD index(email)
+```
+
+**Second Way**
+
+- Function_based index : create the index with get data function 
+```
+alter table json_data ADD index ((CAST('Json' --> '$.email' AS CHAR(255) collate utf8m64_bin)))
+```
+- using cast is very important to know the type and length of data 
+--------------------------
