@@ -76,3 +76,5 @@ Isolation - Isolation Levels for inflight transactions :
 --------------------------------------
 **11-Consistency**
 ------
+- one of the property that were traded of all over platforms 
+- 
